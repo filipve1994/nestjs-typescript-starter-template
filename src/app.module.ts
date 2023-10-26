@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -10,6 +11,17 @@ import { HttpModule } from '@nestjs/axios';
     ConfigModule.forRoot(),
     // https://docs.nestjs.com/techniques/http-module
     HttpModule,
+    // https://docs.nestjs.com/techniques/database
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'test',
+      entities: [],
+      synchronize: true, // NOT on true in PRODUCTION
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
