@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,12 @@ async function bootstrap() {
 
   // https://docs.nestjs.com/techniques/compression
   app.use(compression());
+
+  // https://docs.nestjs.com/security/helmet
+  app.use(helmet());
+
+  // https://docs.nestjs.com/security/cors
+  app.enableCors();
 
   // https://docs.nestjs.com/techniques/validation#auto-validation
   // https://docs.nestjs.com/techniques/validation#stripping-properties

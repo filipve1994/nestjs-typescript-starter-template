@@ -7,4 +7,8 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  getHelloWithRoles(): string {
+    return 'Hello World! from role Admin';
+  }
 }
