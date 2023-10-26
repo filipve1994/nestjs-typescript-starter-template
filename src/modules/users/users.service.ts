@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from '@modules/users/entities/user.entity';
+import { Role } from '@modules/users/enums/role.enum';
 
 @Injectable()
 export class UsersService {
@@ -10,35 +9,17 @@ export class UsersService {
       userId: 1,
       username: 'john',
       password: 'changeme',
+      roles: [Role.User, Role.Admin],
     },
     {
       userId: 2,
       username: 'maria',
       password: 'guess',
+      roles: [Role.User, Role.Admin],
     },
   ];
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
-
-  findAll() {
-    return `This action returns all users`;
-  }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} user`;
-  // }
-
   async findOne(username: string): Promise<User | undefined> {
     return this.users.find((user) => user.username === username);
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 }
